@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TWD HTMX Example</title>
+
+    <!-- HTMX from a CDN (https://htmx.org/docs/#installing). No build step. -->
+    <script src="https://unpkg.com/htmx.org@2.0.10/dist/htmx.min.js"></script>
+
+    <!-- TWD from a CDN via an import map. Same approach as the vanilla example. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "twd-js": "https://esm.sh/twd-js@1.8.2",
+          "twd-js/runner": "https://esm.sh/twd-js@1.8.2/runner",
+          "twd-js/bundled": "https://esm.sh/twd-js@1.8.2/bundled"
+        }
+      }
+    </script>
+
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main id="app">
+      <section>
+        <h1>Welcome to TWD</h1>
+        <!-- A plain client-side counter (the "simple button"). -->
+        <button id="counter">Count is 0</button>
+      </section>
+
+      <section>
+        <h2>Todos</h2>
+
+        <!-- HTMX drives the whole todo list: create posts a form and swaps the
+             returned HTML list into #todo-list. -->
+        <form
+          hx-post="/api/todos"
+          hx-target="#todo-list"
+          hx-swap="innerHTML"
+          hx-on::after-request="this.reset()"
+        >
+          <div class="field">
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" />
+          </div>
+          <div class="field">
+            <label for="description">Description</label>
+            <input id="description" name="description" type="text" />
+          </div>
+          <div class="field">
+            <label for="date">Date</label>
+            <input id="date" name="date" type="text" />
+          </div>
+          <button type="submit">Create Todo</button>
+        </form>
+
+        <button hx-get="/api/todos" hx-target="#todo-list" hx-swap="innerHTML">
+          Load todos
+        </button>
+
+        <ul id="todo-list"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "twd-htmx",
+  "version": "0.0.0",
+  "description": "TWD (Test While Developing) example: an HTMX app that loads TWD from a CDN, tested against a real HTML backend.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "wait-on": "^8.0.1"
+  }
+}

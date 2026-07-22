@@ -1,0 +1,7 @@
+{
+  "url": "http://localhost:3000",
+  "timeout": 10000,
+  "coverage": false,
+  "headless": true,
+  "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"]
+}
